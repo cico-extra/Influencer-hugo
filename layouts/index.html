@@ -3,7 +3,7 @@
 <!-- Banner -->
 {{ if .Site.Data.homepage.banner.enable }}
 {{ with .Site.Data.homepage.banner }}
-<section class="banner-main py-7" id="banner">
+<section class="banner-main py-7 bg-grey" id="banner">
   <div class="container">
     <div class="row justify-content-between">
       <div class="col-lg-7 col-md-8">
@@ -12,13 +12,15 @@
           <h1 class="mb-3 mt-2">{{ .title | markdownify }}</h1>
 
           <div class="mb-4">
-            <h4>Price :- <span class="text-color">${{ .price }}</span></h4>
+            <h4>价格 : <span class="text-color">¥{{ .price }}</span></h4>
           </div>
           <p class="mb-4">{{ .content | markdownify }}</p>
-          <button class="snipcart-add-item btn btn-main mt-2" data-item-id="1"
-          data-item-name="{{ .title | markdownify }}" data-item-image="{{ .image | absURL }}" data-item-price="{{ .price }}" data-item-url="/">
-          Purchase now <i class="ti-angle-right ml-3"></i>
-        </button>
+          <a href="#awards">
+          <button class="btn btn-main mt-2" data-item-id="1"
+          data-item-name="{{ .title | markdownify }}" data-item-image="{{ .image | absURL }}" data-item-price="{{ .price }}" data-item-url="#awards">
+          购买课程 <!-- <i class="ti-angle-right ml-3"></i> -->
+          </button>
+          </a>
         </div>
       </div>
 
@@ -124,6 +126,29 @@
 {{ end }}
 {{ end }}
 
+<!-- Quote -->
+{{ if .Site.Data.homepage.quote2.enable }}
+{{ with .Site.Data.homepage.quote2 }}
+<section class="section bg-grey" id="quote">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center">
+          <blockquote class="blockquote">
+            <h2 class="text-lg">"{{ .quote2 | markdownify }}"</h2>
+            {{ if .quoteBy2 }}
+            <footer class="blockquote-footer h5 text-color mt-4">{{ .quoteBy2 }}</footer>
+            {{ end }}
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+
 <!-- Chapter -->
 {{ if .Site.Data.homepage.chapters.enable }}
 {{ with .Site.Data.homepage.chapters }}
@@ -155,7 +180,7 @@
 <!-- Review-->
 {{ if .Site.Data.homepage.reviews.enable }}
 {{ with .Site.Data.homepage.reviews }}
-<section class="section-bottom testimonial" id="review">
+<section class="section-bottom" id="review"><!-- testimonial -->
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-6 col-md-12">
@@ -241,7 +266,7 @@
 <!-- About Author -->
 {{ if .Site.Data.homepage.author.enable }}
 {{ with .Site.Data.homepage.author }}
-<section class="about section" id="author">
+<section class="about section bg-grey" id="author"><!-- about -->
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-5">
@@ -267,15 +292,45 @@
 {{ end }}
 {{ end }}
 
+<!-- About Mindiverse -->
+{{ if .Site.Data.homepage.organization.enable }}
+{{ with .Site.Data.homepage.organization }}
+<section class="about-new section" id="organization"><!-- about -->
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5">
+        <div class="author-info pl-4 mt-5 mt-lg-0">
+          <h2 class="text-lg">{{ .name }}</h2>
+          <p class="mb-4 lead">- {{ .designation }}</p>
+          {{ .content | markdownify }}
+
+          {{ if .signature }}
+          <img src="{{ .signature | relURL }}" alt="" class="img-fluid">
+          {{ end }}
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="about-img">
+          <img src="{{ .image | relURL }}" alt="{{ .name }}" class="img-fluid w-100">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
 <!-- Awards -->
 {{ if .Site.Data.homepage.awards.enable }}
 {{ with .Site.Data.homepage.awards }}
-<section id="clients-logo-section" class="section-top" id="awards">
+<section class="section bg-grey" id="awards"><!-- section-top -->
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="section-heading text-center">
           <h2 class="text-lg">{{ .title | markdownify }}</h2>
+          <p>{{ .subtitle | markdownify }}</p>
         </div>
       </div>
     </div>
@@ -283,9 +338,9 @@
     <div class="row">
       {{ range .award }}
       <div class="col-lg-3 col-sm-6">
-        <div class="award-block text-center p-4 border mb-4">
+        <div class="service-block text-center p-4 border mb-4 bg-white"> <!-- award-block -->
           <h5 class="mb-3">{{ .title | markdownify }}</h5>
-          <img src="{{ .image | relURL }}" alt="" class="img-fluid">
+          <a href="{{ .url }}"><img src="{{ .image | relURL }}" alt="" class="img-fluid"></a>
         </div>
       </div>
       {{ end }}
@@ -301,7 +356,7 @@
 <section class="section others-book" id="otherBooks">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <div class="section-heading text-center">
           <h2 class="text-lg">{{ .title | markdownify }}</h2>
           <p>{{ .subtitle | markdownify }}</p>
@@ -348,7 +403,7 @@
       {{ end }}
     </div>
     <div class="text-center mt-5">
-      <a href="/blog" class="btn btn-main">All Post</a>
+      <a href="/blog" class="btn btn-main">更多深度内容</a>
     </div>
   </div>
 </section>

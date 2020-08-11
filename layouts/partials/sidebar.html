@@ -1,11 +1,11 @@
 <div class="col-lg-4">
   <div class="sidebar-widget latest-post mb-4 p-4 bg-grey">
-    <h4 class="mb-4">Latest Posts</h4>
+    <h4 class="mb-4">最新文章</h4>
     {{ range first 3 (where .Site.RegularPages "Type" "post")}}
     <div class="media border-bottom py-3">
       <a href="{{ .Permalink }}"><img class="mr-4 post-thumb-sm" src="{{ .Params.Image | relURL }}" alt="{{ .Title | markdownify }}"></a>
       <div class="media-body">
-        <span class="text-sm text-muted">{{ .PublishDate.Format "January 02, 2006" }}</span>
+        <span class="text-sm text-muted">{{ .PublishDate.Format "2006-01-02" }}</span>
         <h6 class="mt-1"><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h6>
       </div>
     </div>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="sidebar-widget category mb-4 p-4 bg-grey">
-    <h4 class="mb-4">Category</h4>
+    <h4 class="mb-4">分类</h4>
     <ul class="list-unstyled">
       {{- if isset .Site.Taxonomies "categories" }}
       {{- if not (eq (len .Site.Taxonomies.categories) 0) }}
@@ -30,7 +30,7 @@
   </div>
 
   <div class="sidebar-widget tags mb-3">
-    <h4 class="mb-4">Tags</h4>
+    <h4 class="mb-4">标签</h4>
     {{- if isset .Site.Taxonomies "tags" }}
     {{- if not (eq (len .Site.Taxonomies.tags) 0) }}
     {{- range $name, $items := .Site.Taxonomies.tags }}
